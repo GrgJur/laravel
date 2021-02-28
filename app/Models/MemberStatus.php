@@ -7,6 +7,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class MemberStatus
@@ -21,7 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MemberStatus extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
+	use HasFactory;
+	
 	protected $table = 'member_status';
 
 	protected $fillable = [

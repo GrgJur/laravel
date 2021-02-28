@@ -22,11 +22,6 @@ class CreateInstructorsTable extends Migration
             $table->date('birthdate');
             $table->string('mobile',100);
             $table->string('password',100);
-            $table->string('session',200);
-            $table->integer('user_status_id');
-            $table->string('pushover',200);
-            $table->string('label',200);
-            $table->integer('rank');
             $table->text('image',100);
             $table->softDeletes();
             $table->timestamps();

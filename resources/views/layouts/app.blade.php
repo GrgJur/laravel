@@ -8,16 +8,18 @@
 
 
     <body>
-    <div class="panel-content" style="background-color: #f2f7fc;">
-    <div class="container">
-    @include('layouts.partials.nav')
-    @include('layouts.partials.alert')
-    @yield('content')
+        <div class="panel-content" style="background-color: #f2f7fc;">
+            <div class="container">
+                @include('layouts.partials.nav')
+                @include('layouts.partials.alert')
 
-    @include('layouts.partials.footer')
-    </div>
-    </div>
-    @include('layouts.partials.footer-scripts')
+                <!-- richiama il template/codice che viene messo all'interno della sezione "content" -->
+                @yield('content')
+
+                @include('layouts.partials.footer')
+            </div>
+        </div>
+        @include('layouts.partials.footer-scripts')
 
     </body>
 

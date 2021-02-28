@@ -1,6 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,10 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 StatusTableSeeder::class,
-                UserStatusTableSeeder::class,
                 LicensesTableSeeder::class,
                 MembersTableSeeder::class,
-                MessagesTableSeeder::class,
+                MessageTableSeeder::class,
                 CourseTypeTableSeeder::class,
                 InstructorsTableSeeder::class,
                 CoursesTableSeeder::class,
@@ -25,17 +28,6 @@ class DatabaseSeeder extends Seeder
                 LessonsTableSeeder::class,
                 LicenseMemberTableSeeder::class,
                 LessonLicenseMemberTableSeeder::class,
-
-
-
-                //AlbumsSeeder::class,
-                //ArticlesSeeder::class,
-
-
-
-                //IncludesSeeder::class,
-
-
                 //SettingsSeeder::class,
                 UsersSeeder::class,
             ]

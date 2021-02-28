@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\Setting;
 
 class SettingsSeeder extends Seeder
 {
@@ -11,6 +14,8 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Setting::class, 100)->create();
+        Setting::factory()
+        			->count(100)
+        			->create();
     }
 }

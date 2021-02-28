@@ -7,6 +7,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class LicenseMember
@@ -23,8 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LicenseMember extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+	use HasFactory;
 
 	protected $table = 'license_member';
 

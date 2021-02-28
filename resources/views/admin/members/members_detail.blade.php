@@ -165,16 +165,16 @@
                                                                             </span>
                                                                         @endif
                                                                     </p>
-                                                                    <a href="{{ route('lessons.show',['lesson'=>$lesson->id]) }}"
+                                                                    <a href="{{ route('lessons.show',$lesson) }}"
                                                                        class="btn btn-info btn-xs">
                                                                         <i class="fa fa-eye"
                                                                            title="{{__('lesson.show')}}"></i>
                                                                     </a>
-                                                                    <a href="{{ route('lessons.edit',['lesson'=>$lesson->id]) }}"
+                                                                    <a href="{{ route('lessons.edit',$lesson) }}"
                                                                        class="btn btn-info btn-xs"><i
                                                                                 class="fa fa-pencil"
                                                                                 title="{{__('lesson.edit')}}"></i></a>
-                                                                    <form action="{{ route('lessons.destroy',['member'=>$lesson->id]) }}"
+                                                                    <form action="{{ route('lessons.destroy',$lesson) }}"
                                                                           method="POST"
                                                                           style="display:inline;margin:0px;padding:0px;">
                                                                         {!! method_field('DELETE') !!}

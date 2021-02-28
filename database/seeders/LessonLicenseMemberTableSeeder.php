@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\LessonLicenseMember;
 
 class LessonLicenseMemberTableSeeder extends Seeder
 {
@@ -11,6 +14,8 @@ class LessonLicenseMemberTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\LessonLicenseMember::class, 100)->create();
+        LessonLicenseMember::factory()
+        			->count(100)
+        			->create();
     }
 }

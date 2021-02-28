@@ -114,8 +114,7 @@ class LessonController extends Controller
             ->paginate(10);
 
            // dd($courses);
-
-        return view('admin.lessons.lessons_show',compact('courses','typ','courses'));
+        return view('admin.lessons.lessons_show',compact('courses','typ'));
     }
 
 
@@ -393,7 +392,7 @@ class LessonController extends Controller
         $lessonLicenseMember->notes=$request->notes;
         $lessonLicenseMember->save();
 
-        //return redirect()->route('lessons.edit',['lesson'=>$lesson->id])->with('id',trans('lesson.member_removed'))->withInput(['tab'=>'tab2']);
+        return redirect()->route('lessons.edit',['lesson'=>$lesson->id])->with('id',trans('lesson.member_removed'))->withInput(['tab'=>'tab2']);
     }
 
 

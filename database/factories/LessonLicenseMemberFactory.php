@@ -1,12 +1,34 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
+
+use App\Models\LessonLicenseMember;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class LessonLicenseMemberFactory extends Factory
+{
+
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = LessonLicenseMember::class;
 
 
-$factory->define(App\Models\LessonLicenseMember::class, function (Faker $faker) {
-    return [
-        'lesson_id' => $faker->numberBetween(1, 100),
-        'notes' => $faker->sentence,
-        'license_member_id' => $faker->numberBetween(1, 100),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'lesson_id' => $this->faker->numberBetween(1, 100),
+        	'notes' => $this->faker->sentence,
+        	'license_member_id' => $this->faker->numberBetween(1, 100),
+        ];
+    }
+
+}

@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\Member;
 
 class MembersTableSeeder extends Seeder
 {
@@ -11,6 +14,9 @@ class MembersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Member::class, 1000)->create();
+        Member::factory()
+        			->count(1000)
+        			->create();
+        
     }
 }

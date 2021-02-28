@@ -9,6 +9,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 /**
@@ -36,8 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Member extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+	
+    use HasFactory;
 
 
 	protected $casts = [

@@ -7,6 +7,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Instructor
@@ -33,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Instructor extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
+	use HasFactory;
 
 	protected $casts = [
 		'user_status_id' => 'int',

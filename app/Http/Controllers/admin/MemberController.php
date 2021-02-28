@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use \App\Http\Controllers\Traits;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\View;
 
 class MemberController extends Controller
 {
@@ -28,11 +29,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //return view('admin.members.members_index');
-
-        //return Datatables::of(Member::select('email','firstname','lastname','address','zip','city','phone','mobile','work','birthdate'))->make(true);
         $members=Member::orderBy('lastname', 'asc')->paginate(10);
-        //print_r($members);
 
         return view('admin.members.members_show',compact('members'));
     }
@@ -117,7 +114,7 @@ class MemberController extends Controller
         list($licenseMember, $licenseMemberId) = $this->getLicensesMemberId($member);
 
         $courses = $member->getCoursesByLicenseMember($licenseMemberId);
-        //dd($courses);
+
         $lessonsId = $member->getLessonsIdByLicenseMemberId($licenseMemberId);
         return view('admin.members.members_detail',compact('member','id','licenseMember','courses','lessonsId'));
     }
@@ -157,7 +154,7 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         $validator=Validator::make($request->all(),[
             'title'=> 'bail|required|max:50',
@@ -174,7 +171,7 @@ class MemberController extends Controller
 
         ]);
         if($validator->fails()){
-            return redirect("/admin/members/$id/edit")
+            return back()
                 ->withInput()
                 ->withErrors($validator);
         }

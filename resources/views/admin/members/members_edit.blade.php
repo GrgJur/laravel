@@ -16,7 +16,6 @@
                 <div class="panel panel-white">
                     <div class="form-group"></div>
                     <div role="tabpanel">
-                        <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item"><a class="nav-link active" href="#tab1"
                                                     data-toggle="tab">{{__('member.details')}}</a></li>
@@ -27,9 +26,9 @@
                             <div class="tab-pane active" id="tab1" role="tabpanel">
                                 <div class="panel panel-default p-3 mb-2 bg-light text-dark">
                                     <div class="form-group"></div>
-                                    {!! Form::model($member, ['method' => 'PUT','route' => ['members.update', $member->id]]) !!}
-                                    @include('admin.members.members_form', ['submitButtonText' => __('member.edit')])
-                                    {!! Form::close() !!}
+                                    <form action="{{ route('members.update',$member) }}" method="POST">
+                                        @include('admin.members.members_form')
+                                    </form>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2" role="tabpanel">

@@ -8,6 +8,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Message
@@ -25,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Message extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
+	use HasFactory;
 
 	protected $casts = [
 		'member_id' => 'int',

@@ -93,11 +93,11 @@
                                             @elseif(count($lesson->LessonLicenseMember)<($course->type->max_members))
                                                 <span class="badge badge-pill badge-warning">{{count($lesson->LessonLicenseMember) }}
                                                     /{{$course->type->max_members }}
-                                                    </span>
+                                                </span>
                                             @elseif(count($lesson->LessonLicenseMember)>=($course->type->max_members))
                                                 <span class="badge badge-pill badge-danger">{{count($lesson->LessonLicenseMember) }}
                                                     /{{$course->type->max_members }}
-                                                    </span>
+                                                </span>
                                             @endif
                                         </p>
                                         <a href="{{ route('lessons.show',['lesson'=>$lesson->id]) }}"
@@ -107,16 +107,6 @@
                                         <a href="{{ route('lessons.edit',['lesson'=>$lesson->id]) }}"
                                            class="btn btn-info btn-xs"><i class="fa fa-pencil"
                                                                           title="{{__('lesson.edit')}}"></i></a>
-
-
-                                        <form action=" {{ route('lessons.destroy',['member'=>$lesson->id]) }}" method="POST"
-                                              style="display:inline;margin:0px;padding:0px;">
-                                            {!! method_field('DELETE') !!}
-                                            {!! csrf_field() !!}
-                                            <button class="btn btn-danger btn-xs btn-delete">
-                                                <i class="fa fa-trash-o" title="{{__('lesson.delete')}}"></i>
-                                            </button>
-                                        </form>
 
 
                                     </div>

@@ -7,6 +7,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class License
@@ -24,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class License extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
+	use HasFactory;
 
 	protected $casts = [
 		'license_type_id' => 'int',

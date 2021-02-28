@@ -1,28 +1,47 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
+
+use App\Models\Lesson;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class LessonFactory extends Factory
+{
+
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Lesson::class;
 
 
-$factory->define(App\Models\Lesson::class, function (Faker $faker) {
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
 
-    $courseId=\App\Models\Course::all()->pluck('id');
-    $randId=$faker->randomElement($courseId);
-    $instructorId=\App\Models\Instructor::all()->pluck('id');
-    $availablesLessons=[];
-    $numless=\App\Models\Course::find($randId)->type->number_lessons;
+        $courseId=\App\Models\Course::all()->pluck('id');
+        $randId=$this->faker->randomElement($courseId);
+        $instructorId=\App\Models\Instructor::all()->pluck('id');
+        $availablesLessons=[];
+        $numless=\App\Models\Course::find($randId)->type->number_lessons;
 
-    for($i=1;$i<$numless+1;$i++){
-        $availablesLessons[]=$i;
+        for($i=1;$i<$numless+1;$i++){
+            $availablesLessons[]=$i;
+        }
+
+        return [
+            'course_id' => $randId,
+            'date_time' => $this->faker->dateTime()->format('d-m-Y H:i'),
+            'number' => $this->faker->randomElement($availablesLessons),
+            'instructor_id' => $this->faker->randomElement($instructorId),
+            'status_id' => $this->faker->numberBetween(1, 3),
+        ];
     }
 
-
-
-    return [
-        'course_id' => $randId,
-        'date_time' => $faker->dateTime()->format('d-m-Y H:i'),
-        'number' => $faker->randomElement($availablesLessons),
-        'instructor_id' => $faker->randomElement($instructorId),
-        'status_id' => $faker->numberBetween(1, 3)
-
-    ];
-});
+}

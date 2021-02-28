@@ -27,9 +27,6 @@ class CreateMembersTable extends Migration
             $table->string('mobile',100);
             $table->string('work',100)->nullable();;
             $table->date('birthdate');
-            $table->integer('instructor_id')->nullable();
-            $table->integer('user_status_id')->nullable();;
-            $table->string('session',200)->nullable();;
             $table->softDeletes();
             $table->timestamps();
         });

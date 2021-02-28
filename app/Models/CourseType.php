@@ -7,6 +7,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class CourseType
@@ -23,7 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CourseType extends Model
 {
-	use \Illuminate\Database\Eloquent\SoftDeletes;
+	use HasFactory;
+	
 	protected $table = 'course_type';
 
 	protected $casts = [
