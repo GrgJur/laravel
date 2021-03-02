@@ -84,6 +84,6 @@
 <div class="form-group">
     <a href="{{ url()->previous() }}" class="btn btn-primary"><i
                 class="fa fa-angle-double-left"></i>{{__('general.back')}}</a>
-    <input class="btn btn-primary" type="submit" value="">
+    <input class="btn btn-primary" type="submit" value="{{ $submitButtonText }}">
 </div>
 

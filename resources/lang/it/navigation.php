@@ -20,7 +20,7 @@ return [
     'sens' => 'Corsi sensibilizzazione',
     'moto' => 'Corsi moto',
     'all' => 'Allievi',
-    'stat' => 'Statistiche',
+    'pay' => 'Pagamenti',
     'ann' => 'Annunci sul sito',
     'setup' => 'Impostazioni',
     'logout' => 'Logout',

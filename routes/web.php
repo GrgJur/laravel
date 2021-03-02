@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\LessonController;
 use App\Http\Controllers\admin\PaymentsController;
+//use App\Http\Controllers\admin\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 
     Route::get('payments/index', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('payments/search', [PaymentsController::class, 'search'])->name('payments.search');
-    
-    Route::resource('lessons', 'LessonController', array('except' => array('create', 'index')));
-    Route::resource('courses', 'CourseController', array('except' => array('index','show')));
+    Route::get('payments/create', [PaymentsController::class, 'index'])->name('payments.create');
+    Route::get('payments/details/{id}', [PaymentsController::class, 'details'])->name('payments.details');
+    Route::get('payments/edit/{id}', [PaymentsController::class, 'edit'])->name('payments.edit');
+    Route::get('payments/destroy/{id}', [PaymentsController::class, 'edit'])->name('payments.destroy');
+
+    Route::resource('lessons', '\App\Http\Controllers\admin\LessonController', array('except' => array('create', 'index')));
+
+
+    Route::resource('courses', '\App\Http\Controllers\admin\CourseController', array('except' => array('index','show')));
 });

@@ -72,11 +72,23 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">{{__('lesson.instructor')}}</th>
-                                                <td>{!! Form::select('instructor', $instructors, $lesson->instructor->id) !!}</td>
+                                                <td>
+                                                    <select name="instructor" id="instructor">
+                                                        @foreach($instructors as $instructorId => $instructorLabel)
+                                                            <option value="{{ $instructorId }}" @if($instructorId === $lesson->instructor->id) selected @endif>{{ $instructorLabel }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">{{__('lesson.status')}}</th>
-                                                <td>{!! Form::select('status', $status, $lesson->status->id) !!}</td>
+                                                <td>
+                                                    <select name="status" id="status">
+                                                        @foreach($status as $statusId => $statusLabel)
+                                                            <option value="{{ $statusId }}" @if($statusId === $lesson->status->id) selected @endif>{{ $statusLabel }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
                                             </tr>
 
                                             </tbody>
@@ -132,10 +144,9 @@
                                                                     class="fa fa-pencil"></i></a>
                                                     </td>
 
-
                                                     <td>
                                                         <form class="delete"
-                                                              action="{{ route('lessons.removeMember', ['licenseMemberId' => $llm->id]) }}"
+                                                              action="{{ route('lessons.removeMember', ['lessonLicenseMemberId' => $llm->id]) }}"
                                                               method="POST">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}

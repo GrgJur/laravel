@@ -23,7 +23,7 @@
                         <a class="{{Request::is('admin/members')? 'nav-link active' : 'nav-link'}}" href="{{route('members.search')}}">{{__('navigation.all')}}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('payments.index')}}">{{__('navigation.stat')}}</a>
+                        <a class="nav-link" href="{{route('payments.index')}}">{{__('navigation.pay')}}</a>
                     </li>
                     <li>
                         <a class="nav-link" href="#contact">{{__('navigation.ann')}}</a>

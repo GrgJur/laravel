@@ -110,10 +110,8 @@ class LessonController extends Controller
             ->leftJoin('lessons','lessons.course_id','courses.id') // LEFT JOIN ON lessons.course_id = courses.id
             ->leftJoin('course_type','courses.course_type_id','course_type.id')
             ->where('course_type.description','=', $typ)
-            //->toSql();
             ->paginate(10);
 
-           // dd($courses);
         return view('admin.lessons.lessons_show',compact('courses','typ'));
     }
 

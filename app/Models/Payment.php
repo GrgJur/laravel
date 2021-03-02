@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
@@ -17,7 +18,13 @@ class Payment extends Model
         'member_id' => 'int'
     ];
 
-
+    protected $fillable = [
+        'date',
+        'member_id',
+        'course_id',
+        'instructor_id',
+        'amount'
+    ];
 
     public function instructor(){
         return $this->belongsTo(Instructor::class);

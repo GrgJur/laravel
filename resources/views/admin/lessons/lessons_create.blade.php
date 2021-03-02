@@ -37,8 +37,12 @@
 
                     <div class="col-sm-3">
                         <label for="instructor_id">{{__('lesson.instructor')}}</label>
-                        <p>
-                        {!! Form::select('instructor_id', $instructors, null) !!}
+                    
+                        <select name="instructor_id">
+                            @foreach($instructors as $instructorId => $instructorLabel)
+                                <option value="{{ $instructorId }}">{{ $instructorLabel }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="col-sm-3">
@@ -52,13 +56,21 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="number">{{__('lesson.number')}}</label>
-                        <p>
-                        {!! Form::select('number', $availablesLessons, null) !!}
+                        
+                        <select name="number" id="number">
+                            @foreach($availablesLessons as $availablesLessonId => $availablesLessonLabel)
+                                <option value="{{ $availablesLessonId }}">{{ $availablesLessonLabel }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-3">
                         <label for="status_id">{{__('lesson.status')}}</label>
-                        <p>
-                        {!! Form::select('status_id', $status, null) !!}
+                        
+                        <select name="status_id" id="status_id">
+                            @foreach($status as $statusId => $statusLabel)
+                                <option value="{{ $statusId }}">{{ $statusLabel }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

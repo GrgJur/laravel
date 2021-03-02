@@ -178,7 +178,7 @@ class MemberController extends Controller
         else{
             $member = Member::findOrFail($id);
             $member->fill($request->all())->save();
-            return redirect()->route('members.index')->with('success',trans('member.updated'));
+            return back()->with('success',trans('member.updated'));
         }
     }
 
@@ -191,7 +191,7 @@ class MemberController extends Controller
     public function destroy($id)
     {
         Member::findOrFail($id)->delete();
-        return redirect()->route('members.index')->with('success',trans('member.deleted'));
+        return back()->with('success',trans('member.deleted'));
     }
 
     public function addLicense($memberId){
@@ -222,7 +222,7 @@ class MemberController extends Controller
         ]);
 
         if($validator->fails()){
-                return redirect("/admin/members/addLicense/$memberId")
+                return back()
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -271,7 +271,7 @@ class MemberController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect("/admin/members/addLicense/$licenseMember->member_id")
+            return back()
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -307,7 +307,7 @@ class MemberController extends Controller
         $license[]=$licenseMemberId;
 
         $courses = $member->getCoursesByLicenseMember($license);
-        //dd($courses);
+        
         $lessonsId = $member->getLessonsIdByLicenseMemberId($license);
 
 

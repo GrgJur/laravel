@@ -27,7 +27,11 @@
 
                     <div class="col-sm-5">
                         <label for="type">{{__('course.type')}}</label><p>
-                        {!! Form::select('type', $type, $actualTypeId) !!}
+                        <select name="type" id="type">
+                            @foreach($type as $typeId => $typeLabel)
+                                <option value="{{ $typeId }}" @if($typeId === $actualTypeId) selected @endif>{{ $typeLabel }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-5">
                         <label for="facebook">{{__('course.facebook')}}</label>
