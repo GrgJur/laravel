@@ -103,13 +103,14 @@ class LessonController extends Controller
 
     public function index($typ)
     {
-
+        
         // Appare 2 volte il corso ID = 89 Perche??
         $courses = Course::select ('courses.id','courses.course_type_id','courses.facebook')
             ->orderBy('courses.id','desc')
             ->leftJoin('lessons','lessons.course_id','courses.id') // LEFT JOIN ON lessons.course_id = courses.id
             ->leftJoin('course_type','courses.course_type_id','course_type.id')
             ->where('course_type.description','=', $typ)
+            ->where('courses.school_id', session()->get('school'))
             ->paginate(10);
 
         return view('admin.lessons.lessons_show',compact('courses','typ'));
@@ -141,7 +142,7 @@ class LessonController extends Controller
             ->paginate(10);
 
         $courses->appends(['search' => $search]);
-        return view('admin.lessons.lessons_show', compact('courses','typ','lessons'))->with($search);
+        return view('admin.lessons.lessons_show', compact('courses','typ'))->with($search);
     }
 
     /**

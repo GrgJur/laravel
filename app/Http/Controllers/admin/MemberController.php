@@ -27,9 +27,9 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members=Member::orderBy('lastname', 'asc')->paginate(10);
+        $members=Member::orderBy('lastname', 'asc')->where('school_id', $request->session()->get('school'))->paginate(10);
 
         return view('admin.members.members_show',compact('members'));
     }
@@ -76,7 +76,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $validator=Validator::make($request->all(),[
+        $data = $request->validate([
             'title'=> 'bail|required|max:50',
             'firstname' => 'bail|required|max:100',
             'lastname'  => 'bail|required|max:100',
@@ -88,17 +88,13 @@ class MemberController extends Controller
             'mobile'=> 'bail|required|max:100',
             'work'=> 'max:100',
             'birthdate'=> 'bail|required|date',
-
+            'registration' => 'bail|required|date',
         ]);
 
+        $data['school_id'] = session()->get('school');
+        $data['password']= '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
 
-        if($validator->fails()){
-            return redirect()
-                ->route('members.create')
-                ->withInput()
-                ->withErrors($validator);
-        }
-        Member::create($request->all());
+        Member::create($data);
         return redirect()->route('members.index')->with('success',trans('member.added'));
     }
 
@@ -312,7 +308,7 @@ class MemberController extends Controller
 
 
 
-        return view('admin.members.members_edit_lessons_inscription',compact('member','id','licenseMember','courses','lessonsId'));
+        return view('admin.members.members_edit_lessons_inscription',compact('member','licenseMember','courses','lessonsId'));
     }
 
 

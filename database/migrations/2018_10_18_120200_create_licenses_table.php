@@ -19,7 +19,6 @@ class CreateLicensesTable extends Migration
             $table->string('long_description',200);
             $table->integer('month_duration');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

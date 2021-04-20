@@ -36,7 +36,8 @@ class Course extends Model
 
 	protected $fillable = [
 		'course_type_id',
-		'facebook'
+		'facebook',
+        'school_id'
 	];
 
     protected $softCascade = ['lessons'];

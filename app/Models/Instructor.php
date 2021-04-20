@@ -6,10 +6,14 @@
  */
 
 namespace App\Models;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Instructor
@@ -34,7 +38,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @package App\Models
  */
-class Instructor extends Model
+class Instructor extends Authenticatable
 {
 	use HasFactory;
 
@@ -64,7 +68,7 @@ class Instructor extends Model
 		'pushover',
 		'label',
 		'rank',
-		'image'
+		'school_id'
 	];
 
     public function user_status(){
@@ -75,9 +79,14 @@ class Instructor extends Model
     }
 
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
     public function payments(){
         return $this->hasMany(Payment::class);
     }
+    
     public function lessons(){
         return $this->hasMany(Lesson::class);
     }

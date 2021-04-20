@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Models\Payment;
 use App\Models\Member;
 use App\Models\Course;
+use App\Models\Instructor;
+use App\Models\CourseType;
+use App\Models\School;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -23,12 +26,31 @@ class PaymentsController extends Controller
 	 * Metodo che serve per mostrare la lista dei pagamenti
 	 * @return view
 	 */
-    public function index(){
+    public function index(Request $request){ 
 
-        $payments = DB::table('payments')
-                    ->join('')
+        $payments = Payment::select('payments.*', 'members.firstname AS member_firstname', 'members.lastname AS member_lastname', 'instructors.firstname AS instructor_firstname', 'instructors.lastname AS instructor_lastname', 'course_type.description')
+                    ->join('members', 'payments.member_id', 'members.id')
+                    ->join('instructors', 'payments.instructor_id', 'instructors.id')
+                    ->join('courses', 'payments.course_id', 'courses.id')
+                    ->join('course_type', 'courses.course_type_id', 'course_type.id')
+                    ->where('members.school_id', $request->session()->get('school'))
+                    ->paginate(10);
 
-        return view('admin.payments.payments_show', ['payments' => DB::table('payments')->paginate(10)]);
+        return view('admin.payments.payments_show', ['payments' => $payments]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     */
+    public function create()
+    {
+        $members = Member::all()->where('school_id', session()->get('school'));
+        $instructors = Instructor::all()->where('school_id', session()->get('school'));
+        $course_types = CourseType::all();
+        return view('admin.payments.payments_create', compact('members', 'instructors', 'course_types'));
     }
 
     /**
@@ -48,6 +70,26 @@ class PaymentsController extends Controller
         return view('admin.payments.payments_show', compact('payments'))->with($search);
     }
 
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        Payment::create($request->validate([
+            'date'=> 'bail|required|date',
+            'member' => 'bail|required|max:100',
+            'instructor'  => 'bail|required|max:100',
+            'course'     => 'bail|required|max:100',
+            'amount'=> 'bail|required|numeric|min:100|max:999',
+
+        ]));
+
+        return back()->with('success',trans('payment.created'));
+    }
+
     /**
      * Mostra la scheda dei dettagli di un pagamento
      * @param  int  $id
@@ -55,8 +97,15 @@ class PaymentsController extends Controller
      */
     public function details($id)
     {
-        $payment = Payment::find($id);
-        return view('admin.payments.payments_details',compact('payment','id'));
+        $payments = Payment::select('payments.*', 'members.firstname AS member_firstname', 'members.lastname AS member_lastname', 'instructors.firstname AS instructor_firstname', 'instructors.lastname AS instructor_lastname', 'course_type.description')
+                    ->join('members', 'payments.member_id', 'members.id')
+                    ->join('instructors', 'payments.instructor_id', 'instructors.id')
+                    ->join('courses', 'payments.course_id', 'courses.id')
+                    ->join('course_type', 'courses.course_type_id', 'course_type.id')
+                    ->where('payments.id', $id)
+                    ->first();
+
+        return view('admin.payments.payments_details', ['payments' => $payments]);
     }
 
     /**
@@ -66,8 +115,45 @@ class PaymentsController extends Controller
      */
     public function edit($id)
     {
-        $payment = Payment::find($id);
-        return view('admin.payments.payments_edit',compact('payment','id'));
+        $payments = Payment::find($id);
+        $members = Member::all()->where('school_id', session()->get('school'));
+        $instructors = Instructor::all()->where('school_id', session()->get('school'));
+        $course_types = CourseType::all();
+        return view('admin.payments.payments_edit', compact('members', 'instructors', 'course_types', 'payments'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     , 'payments*
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, Request $request)
+    {
+        $payments = Payment::findOrFail($id);
+
+        $payments->update($request->validate([
+            'date'=> 'bail|required|date',
+            'member' => 'bail|required|max:100',
+            'instructor'  => 'bail|required|max:100',
+            'course'     => 'bail|required|max:100',
+            'amount'=> 'bail|required|numeric|min:100|max:999',
+        ]));
+
+        return back()->with('success',trans('payment.updated'));
+    }
+
+    /**
+     * Elimina il record di un determinato pagamento
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Payment::findOrFail($id)->delete();
+        return back()->with('success',trans('payment.deleted'));
     }
 
 }

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'sanctum',
         'passwords' => 'users',
     ],
 
@@ -36,15 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'instructor' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'instructor',
         ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'member',
         ],
     ],
 
@@ -66,9 +64,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'instructor' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Instructor::class,
+        ],
+
+        'member' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
         ],
 
         // 'users' => [

@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
                 LessonsTableSeeder::class,
                 LicenseMemberTableSeeder::class,
                 LessonLicenseMemberTableSeeder::class,
-                //SettingsSeeder::class,
                 UsersSeeder::class,
+                SchoolsTableSeeder::class,
             ]
         );
 

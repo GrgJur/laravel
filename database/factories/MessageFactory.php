@@ -24,12 +24,18 @@ class MessageFactory extends Factory
      */
     public function definition()
     {
-
+        $number = rand(0, 1);
+        if ($number == 0) {
+            $type = 'member';
+        }else{
+            $type = 'instructor';
+        }
         return [
             'title' => $this->faker->text,
             'member_id' => $this->faker->numberBetween(1, 100),
             'instructor_id' => $this->faker->numberBetween(1, 100),
             'text' => $this->faker->text,
+            'sent' => $type
         ];
     }
 

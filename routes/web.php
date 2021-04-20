@@ -4,7 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\LessonController;
 use App\Http\Controllers\admin\PaymentsController;
-//use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\StatisticsController;
+use App\Http\Controllers\admin\SchoolsController;
+use App\Http\Controllers\admin\ChatController as AdminChatController;
+use App\Http\Controllers\admin\AuthenticationController as AdminAuthenticationController;
+use App\Http\Controllers\Client\AuthenticationController as ClientAuthenticationController;
+use App\Http\Controllers\Client\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +27,19 @@ use App\Http\Controllers\admin\PaymentsController;
 * Appena si accede al sito, questa e la prima pagina che viene visualizzata.
 */
 Route::get('/', function () {
-    return view('home');
+    return view('admin.authentication.login');
 });
 
-
-Route::resource('members', 'MemberController');
-
+Route::get('/homepage/index', function () {
+    return view('home');
+})->name('homepage.index');
 
 
 ///////////////////////////////MEMBERS///////////////////////////////
 
-Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::resource('members', MemberController::class);
 
     // Percorsi che richiamano il controller MemberController
     Route::get('members/search', [MemberController::class, 'search'])->name('members.search');
@@ -65,13 +73,65 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 
     Route::get('payments/index', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('payments/search', [PaymentsController::class, 'search'])->name('payments.search');
-    Route::get('payments/create', [PaymentsController::class, 'index'])->name('payments.create');
+    Route::get('payments/create', [PaymentsController::class, 'create'])->name('payments.create');
+    Route::post('members/store', [PaymentsController::class, 'store'])->name('payments.store');
     Route::get('payments/details/{id}', [PaymentsController::class, 'details'])->name('payments.details');
     Route::get('payments/edit/{id}', [PaymentsController::class, 'edit'])->name('payments.edit');
-    Route::get('payments/destroy/{id}', [PaymentsController::class, 'edit'])->name('payments.destroy');
+    Route::post('payments/udpdate/{id}', [PaymentsController::class, 'update'])->name('payments.update');
+    Route::delete('payments/destroy/{id}', [PaymentsController::class, 'destroy'])->name('payments.destroy');
 
-    Route::resource('lessons', '\App\Http\Controllers\admin\LessonController', array('except' => array('create', 'index')));
+    Route::get('statistics/index', [StatisticsController::class, 'index'])->name('statistics.index');
+    Route::post('statistics/show', [StatisticsController::class, 'show'])->name('statistics.show');
 
+    Route::get('schools/index', [SchoolsController::class, 'index'])->name('schools.index');
+    Route::get('schools/school/{id}', [SchoolsController::class, 'school'])->name('schools.school');
 
-    Route::resource('courses', '\App\Http\Controllers\admin\CourseController', array('except' => array('index','show')));
+    Route::resource('lessons', LessonController::class)->except([
+        'create', 'index'
+    ]);
+
+    Route::resource('courses', CourseController::class)->except([
+        'show', 'index'
+    ]);
+
+    Route::get('login', [AdminAuthenticationController::class, 'show'])->name('admin.login');
+    Route::post('login', [AdminAuthenticationController::class, 'store']);
+
+    Route::view('home', 'home')->middleware('auth:sanctum');
+
+    Route::get('messages/chat', [AdminChatController::class, 'index'])->name('messages.chat')->middleware('auth:sanctum');
+    Route::post('messages/store', [AdminChatController::class, 'store'])->name('client.store')->middleware('auth:sanctum');
+
+    Route::get('members/chat', [AdminChatController::class, 'members'])->middleware('auth:sanctum');
+
+    Route::get('destroy', [AdminAuthenticationController::class, 'destroy'])->name('admin.logout');
+
+});
+
+Route::group(['prefix' => 'client'], function () {
+
+    Route::get('login', [ClientAuthenticationController::class, 'show'])->name('client.login');//->middleware('guest');
+    Route::post('login', [ClientAuthenticationController::class, 'store']);//->middleware('guest');
+
+    Route::view('home', 'client.home')->middleware('auth:sanctum');
+    Route::get('homepage/index', [ClientAuthenticationController::class, 'homepage'])->name('client.home');
+
+    // protetto
+    Route::get('messages', [ChatController::class, 'index'])->name('client.index')->middleware('auth:sanctum');
+    Route::post('messages/store', [ChatController::class, 'store'])->name('client.store')->middleware('auth:sanctum');
+
+    Route::get('instructors', [ChatController::class, 'instructors'])->middleware('auth:sanctum');
+
+    Route::get('destroy', [ClientAuthenticationController::class, 'destroy'])->name('client.logout');
+
+    Route::get('lessons/index/{type}', [LessonController::class, 'index'])->name('client.lessons');
+
+    Route::resource('lessons', LessonController::class)->except([
+        'create', 'index'
+    ]);
+
+    Route::resource('courses', CourseController::class)->except([
+        'show', 'index'
+    ]);
+
 });

@@ -35,6 +35,8 @@ class Payment extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
-
+    public function course_type(){
+         return $this->belongsTo(Course_type::class);
+    }
 
 }

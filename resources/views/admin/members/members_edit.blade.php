@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2" role="tabpanel">
-                                @include('admin.members.members_edit_licenses')
+                            @include('admin.members.members_edit_licenses')
                             </div>
                         </div>
                     </div>

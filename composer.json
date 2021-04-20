@@ -14,7 +14,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/legacy-factories": "^1.1",
+        "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "^6.1",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

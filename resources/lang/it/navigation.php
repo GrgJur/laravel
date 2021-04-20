@@ -21,9 +21,11 @@ return [
     'moto' => 'Corsi moto',
     'all' => 'Allievi',
     'pay' => 'Pagamenti',
-    'ann' => 'Annunci sul sito',
+    'stats' => 'Statistiche',
     'setup' => 'Impostazioni',
     'logout' => 'Logout',
     'courses' => 'Corsi',
+    'schools' => 'Sede',
+    'mess' => 'ChatBox'
 
 ];

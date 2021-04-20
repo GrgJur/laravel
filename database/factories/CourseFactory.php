@@ -28,6 +28,8 @@ class CourseFactory extends Factory
         return [
             'course_type_id' => $this->faker->numberBetween(1, 4),
         	'facebook' => Str::random(16),
+            'start_at' => $this->faker->date(),
+            'school_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

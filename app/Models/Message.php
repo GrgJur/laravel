@@ -32,16 +32,35 @@ class Message extends Model
 
 	protected $casts = [
 		'member_id' => 'int',
-		'instructor_id' => 'int'
+		'instructor_id' => 'int',
 	];
 
 	protected $fillable = [
 		'title',
 		'member_id',
 		'instructor_id',
-		'text'
+		'text',
+		'sent'
 	];
 
+	protected $appends = [
+		'created'
+	];
 
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class);
+    }
+
+
+    public function getCreatedAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 
 }

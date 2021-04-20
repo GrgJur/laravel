@@ -2,11 +2,12 @@
 
     <div class="container-fluid ">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">{{__('navigation.title')}}</a>
+            <a class="navbar-brand" href="{{route('homepage.index')}}">{{__('navigation.title')}}</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav">
+
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle {{Request::is('admin/lessons')? 'nav-link active' : 'nav-link'}}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{__('navigation.courses')}}
@@ -19,25 +20,26 @@
                                 @endforeach
                         </div>
                     </li>
-                    <li>
-                        <a class="{{Request::is('admin/members')? 'nav-link active' : 'nav-link'}}" href="{{route('members.search')}}">{{__('navigation.all')}}</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{route('payments.index')}}">{{__('navigation.pay')}}</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#contact">{{__('navigation.ann')}}</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#contact">{{__('navigation.setup')}}</a>
-                    </li>
-
 
                     <li>
-                        <a class="nav-link" href="/contact">{{__('navigation.logout')}}</a>
+                        <a class="{{Request::is('admin/members')? 'nav-link active' : 'nav-link'}}" href="{{route('members.index')}}">{{__('navigation.all')}}</a>
+                    </li>
+                    <li>
+                        <a class="{{Request::is('admin/payments/index')? 'nav-link active' : 'nav-link'}}" href="{{route('payments.index')}}">{{__('navigation.pay')}}</a>
+                    </li>
+                    <li>
+                        <a class="{{Request::is('admin/statistics/index')? 'nav-link active' : 'nav-link'}}" href="{{route('statistics.index')}}">{{__('navigation.stats')}}</a>
+                    </li>
+                    <li>
+                        <a class="{{Request::is('admin/schools/index')? 'nav-link active' : 'nav-link'}}" href="{{route('schools.index')}}">{{__('navigation.schools')}}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('messages.chat')}}">{{__('navigation.mess')}}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('admin.logout')}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOGOUT</a>
                     </li>
                 </ul>
-
         </div>
     </div>
 </nav>

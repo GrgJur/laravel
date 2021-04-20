@@ -1,11 +1,9 @@
 {{ csrf_field() }}
 <div class="col-xs-8">
     <label for="title">{{__('member.title')}}</label>
-    <select name="">
-        <option value="m" selected="true">mr</option>
-        <!-- \Illuminate\Support\Facades\Lang::get('member.mr') 
-            \Illuminate\Support\Facades\Lang::get('member.ms')-->
-        <option value="f">ms</option>
+    <select name="title" class="form-control">
+        <option value="m" selected="true">@lang('member.mr')</option>
+        <option value="f">@lang('member.ms')</option>
     </select>
 </div>
 
@@ -34,8 +32,6 @@
             <input class="form-control" type="date" name="birthdate">
             <span class="add-on"><i class="fa fa-calendar"></i></span>
         </div>
-
-
     </div>
     <div class="form-group">
     </div>
@@ -74,6 +70,13 @@
     <label class="awesome" for="work">{{__('member.work')}}</label>
     <input class="form-control" type="text" name="work">
 </div>
+<div class="col-xs-12">
+    <label class="awesome" for="registration">{{__('member.registration')}}</label>
+    <div class="input-append date form_date">
+        <input class="form-control" type="date" name="registration">
+        <span class="add-on"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
 
 
 <div class="form-group">
@@ -82,8 +85,8 @@
 <input type="hidden" name="_token" value="{{ Session::token() }}">
 
 <div class="form-group">
-    <a href="{{ url()->previous() }}" class="btn btn-primary"><i
+    <a href="{{ route('members.index') }}" class="btn btn-primary"><i
                 class="fa fa-angle-double-left"></i>{{__('general.back')}}</a>
-    <input class="btn btn-primary" type="submit" value="{{ $submitButtonText }}">
+    <input class="btn btn-primary" type="submit" value="Salva">
 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Course;
 use App\Models\CourseType;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
@@ -37,38 +38,19 @@ class CourseController extends Controller
         $course=new Course();
 
         $course->course_type_id =$request->type;
-        $course->facebook=$request->facebook;
+        if (empty($request->facebook)) {
+            $course->facebook='kAied234Xle9PW';
+        }else{
+            $course->facebook=$request->facebook;
+        }
+        $course->start_at=now()->toDateString();
+        $course->school_id=$request->session()->get('school');
         $course->save();
 
 
 
         //return redirect()->route('members.index')->with('success','Member Added');
         return redirect()->route('lessons.index',['type'=>$course->type->description])->with('success',trans('course.added'));
-    }
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

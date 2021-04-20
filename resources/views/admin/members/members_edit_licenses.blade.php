@@ -18,19 +18,19 @@
                             <td>{{$licenseMember->license->description}}</td>
                             <td>{{$licenseMember->license->long_description}}</td>
                             <td>{{$licenseMember->license->month_duration}}</td>
-                            <td>{{ $licenseMember->valid_from }}</td>
+                            <td>{{$licenseMember->valid_from }}</td>
                             <td>
-                                <a href="{{ route('members.editLessonInscription', ['licenseMemberId' => $licenseMember->id]) }}"
+                                <a href="{{ route('members.editLessonInscription', $licenseMember) }}"
                                    class="btn btn-primary">
                                     <i class="fa"></i> {{__('member.edit__lesson_inscription')}}
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('members.editLicense', ['licenseMemberId' => $licenseMember->id]) }}"
+                                <a href="{{ route('members.editLicense', $licenseMember) }}"
                                    class="btn btn-info btn-xs edit"><i class="fa fa-pencil"
                                                                        title="{{__('license.edit')}}"></i></a>
                             <td>
-                                <form class="delete" action="{{ route('members.removeLicense',['member'=>$licenseMember->id]) }}"
+                                <form class="delete" action="{{ route('members.removeLicense', $licenseMember) }}"
                                       method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}

@@ -15,8 +15,6 @@ class CreateCourseTypeTable extends Migration
     {
         Schema::create('course_type', function (Blueprint $table) {
             $table->increments('id');
-
-
             $table->string('description',50);
             $table->string('long_description',200);
             $table->integer('number_lessons');

@@ -15,9 +15,8 @@ class CreateLicenseMemberTable extends Migration
     {
         Schema::create('license_member', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('license_id');
-            $table->integer('member_id')->unsigned();
+            $table->integer('member_id');
             $table->date('valid_from');
             $table->softDeletes();
             $table->timestamps();

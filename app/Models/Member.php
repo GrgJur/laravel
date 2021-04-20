@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 /**
@@ -37,10 +39,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon $updated_at
  * @package App\Models
  */
-class Member extends Model
+class Member extends Authenticatable
 {
 	
-    use HasFactory;
+    use HasFactory,
+        HasApiTokens;
 
 
 	protected $casts = [
@@ -54,7 +57,8 @@ class Member extends Model
 	];
 
 	protected $fillable = [
-		'email',
+        'email',
+        'password',
 		'firstname',
 		'lastname',
 		'title',
@@ -65,9 +69,9 @@ class Member extends Model
 		'mobile',
 		'work',
 		'birthdate',
-		'instructor_id',
-		'user_status_id',
-		'session'
+		'session',
+        'school_id',
+        'registration'
 	];
 
     protected $softCascade = ['licenseMember'];
@@ -76,8 +80,12 @@ class Member extends Model
 	    return $this->belongsTo(UserStatus::class);
     }
 
-    public function instructorsMessage(){
-        return $this->belongsToMany(Instructor::class,'messages','instructor_id','member_id')->withPivot(['title','text']);
+    // public function instructorsMessage(){
+    //     return $this->belongsToMany(Instructor::class,'messages','instructor_id','member_id')->withPivot(['title','text']);
+    // }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
     }
 
 
@@ -117,7 +125,7 @@ class Member extends Model
             ->join('license_member','license_member.id','lesson_license_member.license_member_id')
             ->join('licenses','licenses.id','license_member.license_id')
             ->whereIn('lesson_license_member.license_member_id',$licenseMemberId)
-            ->where ('lesson_license_member.deleted_at',null)
+            ->where('lesson_license_member.deleted_at',null)
             ->get();
     }
 

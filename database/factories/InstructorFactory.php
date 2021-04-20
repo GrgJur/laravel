@@ -33,8 +33,9 @@ class InstructorFactory extends Factory
             'email' => $this->faker->email(),
             'birthdate' => $this->faker->date(),
             'mobile' => $this->faker->phoneNumber,
-            'password' => Str::random(16),
+            'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
             'image' => Str::random(16),
+            'school_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

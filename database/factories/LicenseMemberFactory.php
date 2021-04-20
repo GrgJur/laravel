@@ -26,7 +26,7 @@ class LicenseMemberFactory extends Factory
     {
         return [
             'license_id' => $this->faker->numberBetween(1, 4),
-        	'member_id' =>  $this->faker->numberBetween(1, 1000),
+        	'member_id' =>  $this->faker->numberBetween(1, 100),
         	'valid_from' => $this->faker->date()
         ];
     }

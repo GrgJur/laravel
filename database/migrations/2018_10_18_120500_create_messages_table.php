@@ -13,11 +13,14 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
+        // select * from messages where member_id = 1 and instructor = 1 
+
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
-            $table->integer('member_id');
-            $table->integer('instructor_id');
+            $table->text('title'); // ciao Damir -  ciao Jure
+            $table->integer('member_id'); // from Jure // Damir
+            $table->integer('instructor_id'); // to Damir // Jure
+            $table->string('sent');
             $table->text('text');
             $table->softDeletes();
             $table->timestamps();

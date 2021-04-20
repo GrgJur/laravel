@@ -18,11 +18,12 @@ class CreateInstructorsTable extends Migration
             $table->string('init',2);
             $table->string('firstname',100);
             $table->string('lastname',100);
-            $table->string('email',100);
+            $table->string('email');
             $table->date('birthdate');
             $table->string('mobile',100);
-            $table->string('password',100);
+            $table->string('password');
             $table->text('image',100);
+            $table->integer('school_id');
             $table->softDeletes();
             $table->timestamps();
         });

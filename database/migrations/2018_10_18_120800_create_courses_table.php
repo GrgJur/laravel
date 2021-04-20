@@ -15,11 +15,11 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('course_type_id');
+            $table->date('start_at');
             $table->string('facebook',50);
+            $table->integer('school_id');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

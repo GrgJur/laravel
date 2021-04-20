@@ -40,6 +40,9 @@ class MemberFactory extends Factory
             'mobile' => $this->faker->phoneNumber,
             'work' => $this->faker->phoneNumber,
             'birthdate' => $this->faker->date(),
+            'registration' => $this->faker->date(),
+            'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+            'school_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 

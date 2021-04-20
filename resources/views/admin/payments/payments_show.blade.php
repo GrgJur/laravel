@@ -54,21 +54,20 @@
                             <!-- Table Body -->
                             <tbody>
                             @foreach ($payments as $payment)
-
                                 <tr>
                                     <td class="table-text"><div>{{ $payment->date }}</div></td>
-                                    <td class="table-text"><div>{{ $payment->member->lastname }}</div></td>
-                                    <td class="table-text"><div>{{ $payment->course_type->description }}</div></td>
-                                    <td class="table-text"><div>{{ $payment->instructor->lastname }}</div></td>
-                                    <td class="table-text"><div>{{ $payment->amount }}</div></td>
+                                    <td class="table-text"><div>{{ $payment->member_firstname }} {{ $payment->member_lastname }}</div></td>
+                                    <td class="table-text"><div>{{ $payment->description }}</div></td>
+                                    <td class="table-text"><div>{{ $payment->instructor_firstname }} {{ $payment->instructor_lastname}}</div></td>
+                                    <td class="table-text"><div>{{ $payment->amount }} CHF</div></td>
                                     <td>
-                                        <a href="{{ route('payments.details',$payment->id) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="{{__('payment.details')}}"></i></a>
+                                        <a href="{{ route('payments.details', $payment) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="{{__('payment.details')}}"></i></a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('payments.edit',$payment->id) }}" class="btn btn-info btn-xs edit"><i class="fa fa-pencil" title="{{__('payment.edit')}}"></i></a>
+                                        <a href="{{ route('payments.edit',$payment) }}" class="btn btn-info btn-xs edit"><i class="fa fa-pencil" title="{{__('payment.edit')}}"></i></a>
                                     </td>
                                     <td>
-                                        <form class="delete" action="{{ route('payments.destroy',$payment->id) }}" method="POST">
+                                        <form class="delete" action="{{ route('payments.destroy',$payment) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button class="btn btn-danger btn-xs btn-delete" >
