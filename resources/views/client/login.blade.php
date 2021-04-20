@@ -43,15 +43,14 @@
 			<input type="text" name="email" id="email" placeholder="email"><br>
 			<input type="password" name="password" id="password" placeholder="password"><br><br>
 			<input type="submit" value="Login"><br>
-			<a href="#">Password dimenticata?</a>
 		</form>
 	</div>
-	
+
 
 	<script>
 		window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		window.axios.defaults.withCredentials = true;
-		
+
 		document.getElementById('form').addEventListener('submit', function(event) {
 			event.preventDefault()
 
@@ -60,7 +59,7 @@
 				password: document.getElementById('password').value,
 			})
 			  .then(function (response) {
-			    
+
 			    window.location.replace('/client/home')
 
 			  })

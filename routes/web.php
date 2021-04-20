@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\ChatController as AdminChatController;
 use App\Http\Controllers\admin\AuthenticationController as AdminAuthenticationController;
 use App\Http\Controllers\Client\AuthenticationController as ClientAuthenticationController;
 use App\Http\Controllers\Client\ChatController;
+use App\Http\Controllers\Client\LessonController as ClientLessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,14 +125,10 @@ Route::group(['prefix' => 'client'], function () {
 
     Route::get('destroy', [ClientAuthenticationController::class, 'destroy'])->name('client.logout');
 
-    Route::get('lessons/index/{type}', [LessonController::class, 'index'])->name('client.lessons');
+    Route::get('lessons/index/{type}', [ClientLessonController::class, 'index'])->name('client.lessons');
 
-    Route::resource('lessons', LessonController::class)->except([
+    Route::resource('lessons', ClientLessonController::class)->except([
         'create', 'index'
-    ]);
-
-    Route::resource('courses', CourseController::class)->except([
-        'show', 'index'
     ]);
 
 });

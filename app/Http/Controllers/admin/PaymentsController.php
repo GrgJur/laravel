@@ -26,7 +26,7 @@ class PaymentsController extends Controller
 	 * Metodo che serve per mostrare la lista dei pagamenti
 	 * @return view
 	 */
-    public function index(Request $request){ 
+    public function index(Request $request){
 
         $payments = Payment::select('payments.*', 'members.firstname AS member_firstname', 'members.lastname AS member_lastname', 'instructors.firstname AS instructor_firstname', 'instructors.lastname AS instructor_lastname', 'course_type.description')
                     ->join('members', 'payments.member_id', 'members.id')
@@ -80,9 +80,9 @@ class PaymentsController extends Controller
     {
         Payment::create($request->validate([
             'date'=> 'bail|required|date',
-            'member' => 'bail|required|max:100',
-            'instructor'  => 'bail|required|max:100',
-            'course'     => 'bail|required|max:100',
+            'member_id' => 'bail|required|numeric',
+            'instructor_id'  => 'bail|required|numeric',
+            'course_id'     => 'bail|required|numeric',
             'amount'=> 'bail|required|numeric|min:100|max:999',
 
         ]));

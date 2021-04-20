@@ -8,8 +8,8 @@
     <div class="form-group">
     </div>
     <div class="col">
-        <label class="awesome" for="member">{{__('payment.member')}}</label>
-        <select class="form-control" name="member">
+        <label class="awesome" for="member_id">{{__('payment.member')}}</label>
+        <select class="form-control" name="member_id">
             @foreach($members as $member)
                 <option value="{{$member->id}}">{{$member->firstname}} {{$member->lastname}}</option>
             @endforeach
@@ -17,8 +17,8 @@
 
     </div>
     <div class="col">
-        <label class="awesome" for="instructor">{{__('payment.instructor')}}</label>
-        <select class="form-control" name="instructor">
+        <label class="awesome" for="instructor_id">{{__('payment.instructor')}}</label>
+        <select class="form-control" name="instructor_id">
             @foreach($instructors as $instructor)
                 <option value="{{$instructor->id}}">{{$instructor->firstname}} {{$instructor->lastname}}</option>
             @endforeach
@@ -33,10 +33,10 @@
 <div class="row">
 
     <div class="col">
-        <label class="awesome" for="course">{{__('payment.course')}}</label>
-        <select class="form-control" name="course">
+        <label class="awesome" for="course_id">{{__('payment.course')}}</label>
+        <select class="form-control" name="course_id">
             @foreach($course_types as $course_type)
-                <option>{{$course_type->description}}</option>
+                <option value="{{$course_type->id}}">{{$course_type->description}}</option>
             @endforeach
         </select>
     </div>

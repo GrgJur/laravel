@@ -103,8 +103,6 @@ class LessonController extends Controller
 
     public function index($typ)
     {
-        
-        // Appare 2 volte il corso ID = 89 Perche??
         $courses = Course::select ('courses.id','courses.course_type_id','courses.facebook')
             ->orderBy('courses.id','desc')
             ->leftJoin('lessons','lessons.course_id','courses.id') // LEFT JOIN ON lessons.course_id = courses.id

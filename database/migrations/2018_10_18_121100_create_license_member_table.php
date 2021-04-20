@@ -21,7 +21,8 @@ class CreateLicenseMemberTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
+            // Da errore durante la migrazione
+            //$table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
 
         });
     }

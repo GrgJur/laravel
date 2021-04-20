@@ -196,7 +196,7 @@ class MemberController extends Controller
         foreach ( Member::find($memberId)->licenseMember as $item) {
             $actualLicensesId[]=$item->license_id;
         }
-        //dd($actualLicensesId);
+
         $licenses = License::select(DB::raw("CONCAT(description,' (',long_description,')')as license"),'id')
               ->whereNotIn('id', $actualLicensesId)
               ->pluck('license', 'id');
@@ -303,7 +303,7 @@ class MemberController extends Controller
         $license[]=$licenseMemberId;
 
         $courses = $member->getCoursesByLicenseMember($license);
-        
+
         $lessonsId = $member->getLessonsIdByLicenseMemberId($license);
 
 

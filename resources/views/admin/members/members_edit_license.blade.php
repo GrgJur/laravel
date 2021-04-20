@@ -43,7 +43,7 @@
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <!-- Add lesson Button -->
                 <div class="form-group">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary"><i
+                    <a href="{{ members.index }}" class="btn btn-primary"><i
                                 class="fa fa-angle-double-left"></i>{{__('general.back')}}</a>
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-plus"></i> {{__('license.edit')}}

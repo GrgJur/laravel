@@ -76,23 +76,23 @@
 </head>
 <body>
 
+    <div style="float: left; margin: 4px"><a href="{{route('homepage.index')}}">HOME</a></div>
+
+    <div style="float: left; margin: 4px"><a href="{{route('admin.logout')}}">LOGOUT</a></div>
+
 	<div id="container">
-
-		<div style="float: left; margin: 4px"><a href="{{route('homepage.index')}}">HOME</a></div>
-
-		<div style="float: left; margin: 4px"><a href="{{route('admin.logout')}}">LOGOUT</a></div>
 
 		<h3>Messaggi per {{ auth()->user()->firstname }} ({{ auth()->user()->email }})</h3>
 
 		<div id="app">
 
 			<form @submit.prevent="onSubmit">
-				
+
 				<select v-model="member_id" style="width: 100%">
-					<option 
-						v-for="member in members" 
+					<option
+						v-for="member in members"
 						:key="member.id"
-						:value="member.id" 
+						:value="member.id"
 						v-text="member.firstname" />
 				</select>
 
@@ -106,11 +106,11 @@
 
 			<hr>
 
-			<div 
-				v-for="(message, index) in messages" 
+			<div
+				v-for="(message, index) in messages"
 				:key="message.id"
-				class="container" 
-				:class="{ 'darker': message.sent == 'instructor' }"  
+				class="container"
+				:class="{ 'darker': message.sent == 'instructor' }"
 			>
 				<small class="title-message">@{{ message.title }}</small>
 				<p>@{{ message.text }}</p>
@@ -119,13 +119,13 @@
 		</div>
 
 	</div>
-	
+
 
 	<script>
 
 		window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		window.axios.defaults.withCredentials = true;
-   
+
 		var app = Vue.createApp({
 		    data() {
 		      return {
@@ -137,16 +137,16 @@
 		      };
 		    },
 
-			mounted() {             
-		      console.log('mounted!')   
+			mounted() {
+		      console.log('mounted!')
 
-				axios.get('/admin/messages/chat', { 
-					params: { 
+				axios.get('/admin/messages/chat', {
+					params: {
 						page: this.page
 					}
 				})
 				  .then((response) => {
-				    
+
 				   this.messages = response.data.message
 
 				   console.log(this.messages)
@@ -156,13 +156,13 @@
 				  })
 				  .catch(function (error) {
 				  	console.log(error)
-				  })     
+				  })
 
 				axios.get('/admin/members')
 					.then((response) => {
 						console.log(response.data)
 						this.members = response.data
-					}) 
+					})
 		    },
 
 		    methods: {
@@ -181,7 +181,7 @@
 
 		    		const titolo = 'Messaggio inviato da {{ auth()->user()->firstname }} a ' + membro.firstname;
 
-			    	axios.post('/admin/messages/store', { 
+			    	axios.post('/admin/messages/store', {
 						title: titolo,
 						text: this.message,
 						member_id: this.member_id
@@ -192,7 +192,7 @@
 					  })
 					  .catch(function (error) {
 					  	console.log(error)
-					  })		
+					  })
 		    	}
 		    }
 
